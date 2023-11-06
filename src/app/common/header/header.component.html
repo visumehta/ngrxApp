@@ -1,5 +1,6 @@
-<mat-card [class.dark-theme] = "isDarkMode$ | async">
+<mat-card>
   <mat-toolbar>
+  <!-- <mat-toolbar [ngClass]="{'dark-theme': (isDarkMode$ | async)}"> -->
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
@@ -10,10 +11,15 @@
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="toggleTheme()">
+      <button mat-menu-item (click)="toggleMode()">
         <mat-icon>dark_mode</mat-icon>
         <span>Dark mode</span>
       </button>
+      <button mat-menu-item (click)="toggleMode()">
+        <mat-icon>light_mode</mat-icon>
+        <span>Light mode</span>
+      </button>
+      <span>{{ (themeFacade.isDarkMode | async) ? 'Dark Mode' : 'Light Mode' }}</span>
       <button mat-menu-item>
         <mat-icon>translate</mat-icon>
         <span>

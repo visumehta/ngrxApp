@@ -5,13 +5,17 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideStore } from "@ngrx/store";
 import { modeReducer } from "./common/theme/modes/mode.reducer";
 import { provideStoreDevtools } from "@ngrx/store-devtools";
+import { provideEffects } from '@ngrx/effects';
+// import { ModeEffects } from "./common/theme/modes/mode.effects";
 
 export const appConfig: ApplicationConfig = {
     providers: [
     provideRouter([...routes]),
     provideAnimations(),
     importProvidersFrom(),
-    provideStore({darkMode: modeReducer}),
+    provideStore({ darkMode: modeReducer }),
+    // provideEffects([ModeEffects]),
     provideStoreDevtools(),
+    provideAnimations()
 ]
 }

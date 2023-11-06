@@ -22,16 +22,33 @@ import { modeState } from '../theme/modes/mode.state';
 export class HeaderComponent {
   @ViewChild('menuTrigger') menuTrigger!: MatMenuTrigger;
   isDarkMode$!: Observable<boolean>
-  constructor(public dialog: MatDialog, private themeFacade: themeFacade) {
-    this.isDarkMode$ = this.themeFacade.isDarkMode;
+  constructor(public dialog: MatDialog, public themeFacade: themeFacade) {
+    // this.isDarkMode$ = this.themeFacade.isDarkMode;
+    // this.isDarkMode$.subscribe((res: any) => { console.log(res);
+    // })
+    
   }
   openDialog() {
     const openDialog = this.dialog.open(LoginComponent, {restoreFocus: false});
     openDialog.afterClosed().subscribe(() => this.menuTrigger.focus());
   }
 
-  toggleTheme() {
-    this.themeFacade.toggleTheme()
+  toggleMode() {
+    this.isDarkMode$.subscribe((isDark: boolean) => {
+      console.log('res mode', isDark);
+      if (isDark) {
+        console.log('isdark1', isDark);
+        
+        this.themeFacade.setLightMode();
+      } else {
+        console.log('isdark2', isDark);
+
+        this.themeFacade.setDarkMode();
+      }
+      
+    })
+    
+    
   }
 
 }
