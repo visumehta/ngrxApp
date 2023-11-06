@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+// @import '~@angular/material/themeing';
+
+// .dark-theme {
+//   $primary: mat-palette($mat-blue, 700);
+//   $accent: mat-palette($mat-yellow, A200);
+//   $theme: mat-dark-theme($primary, $accent);
+
+//   @include angular-material-theme($theme);
+// }
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.bg-black {
+  background-color: #000 !important;
+}
+
+

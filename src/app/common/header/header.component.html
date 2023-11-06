@@ -1,0 +1,30 @@
+<mat-card [class.dark-theme] = "isDarkMode$ | async">
+  <mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="example-spacer"></span>
+
+    <button mat-mini-fab class="bg-black" [matMenuTriggerFor]="menu" #menuTrigger>
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="toggleTheme()">
+        <mat-icon>dark_mode</mat-icon>
+        <span>Dark mode</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>translate</mat-icon>
+        <span>
+          <button mat-button>English</button>
+          <button mat-button>Hindi</button>
+        </span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</mat-card>
