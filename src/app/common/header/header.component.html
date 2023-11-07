@@ -1,30 +1,28 @@
+<ng-container *transloco="let t">
 <mat-card>
-  <mat-toolbar>
-  <!-- <mat-toolbar [ngClass]="{'dark-theme': (isDarkMode$ | async)}"> -->
+<!-- <mat-card [ngClass]="{'dark-theme': (isDarkMode$ | async)}"> -->
+  <mat-toolbar color="primary">
+  <!-- <mat-toolbar [ngClass]="isDarkMode$ | async"> -->
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
-    <span>My App</span>
+    <span>{{t('header.my_app')}}</span>
     <span class="example-spacer"></span>
 
     <button mat-mini-fab class="bg-black" [matMenuTriggerFor]="menu" #menuTrigger>
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="toggleMode()">
-        <mat-icon>dark_mode</mat-icon>
-        <span>Dark mode</span>
+      <button mat-menu-item (click)="toggleTheme()">
+        <mat-icon>{{(theme === 'light') ? 'dark_mode' : 'light_mode'}}</mat-icon>
+        <span>{{(theme === 'light') ? 'Dark Mode' : 'Light Mode'}}</span>
       </button>
-      <button mat-menu-item (click)="toggleMode()">
-        <mat-icon>light_mode</mat-icon>
-        <span>Light mode</span>
-      </button>
-      <span>{{ (themeFacade.isDarkMode | async) ? 'Dark Mode' : 'Light Mode' }}</span>
+     
       <button mat-menu-item>
         <mat-icon>translate</mat-icon>
         <span>
-          <button mat-button>English</button>
-          <button mat-button>Hindi</button>
+          <button mat-button (click)="changeLanguage('en')" [disabled]="getLang == 'en'">English</button> |
+          <button mat-button (click)="changeLanguage('hi')" [disabled]="getLang == 'hi'">Hindi</button>
         </span>
       </button>
       <button mat-menu-item>
@@ -34,3 +32,5 @@
     </mat-menu>
   </mat-toolbar>
 </mat-card>
+
+</ng-container>

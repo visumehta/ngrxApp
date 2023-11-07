@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HeaderComponent } from './common/header/header.component';
 import { CommonModule } from '@angular/common';
-import { themeFacade } from './common/theme/theme.facade';
-
+import { TranslocoService } from '@ngneat/transloco';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -10,6 +9,13 @@ import { themeFacade } from './common/theme/theme.facade';
     standalone: true,
     imports: [HeaderComponent, CommonModule],
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'myApp';
+  translocoService = inject(TranslocoService)
+  
+  ngOnInit(): void {
+      this.translocoService.getDefaultLang()
+      // console.log(this.translocoService.getDefaultLang());
+      
+  }
 }
