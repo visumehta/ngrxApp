@@ -9,10 +9,14 @@ import { provideAnimations } from "@angular/platform-browser/animations";
 import { provideStore } from "@ngrx/store";
 import { provideStoreDevtools } from "@ngrx/store-devtools";
 import { themeReducer } from "./common/util/theme/theme.reducer";
-import { provideHttpClient } from "@angular/common/http";
+import { provideHttpClient, withInterceptors, withInterceptorsFromDi } from "@angular/common/http";
 import { TranslocoHttpLoader } from "../app/transloco-loader";
 import { TRANSLOCO_LOADER, provideTransloco } from "@ngneat/transloco";
 import { languageReducer } from "./common/util/language/language.reducer";
+import { productReducer } from "./product/product.reducer";
+import { provideEffects } from "@ngrx/effects";
+import { ProductEffects } from "./product/product.effects";
+import { dialogReducer } from "./common/util/dialog/dialog.reducer";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,12 +26,18 @@ export const appConfig: ApplicationConfig = {
     provideStore({
       currentTheme: themeReducer,
       selectedLanguage: languageReducer,
+      products: productReducer,
+      openDialog: dialogReducer
     }),
+    provideEffects([ProductEffects]),
     provideStoreDevtools({
       maxAge: 55,
       logOnly: false, // maximum stack trace frames to be stored (in case trace option was provided as true)
     }),
-    provideHttpClient(),
+    provideHttpClient(
+      withInterceptorsFromDi(),
+      withInterceptors([])
+    ),
     provideTransloco({
       config: {
         availableLangs: ["en", "hi"],

@@ -29,7 +29,7 @@ import { TranslocoModule } from "@ngneat/transloco";
   ],
 })
 export class HeaderComponent {
-  @ViewChild("menuTrigger") menuTrigger!: MatMenuTrigger;
+  // @ViewChild("menuTrigger") menuTrigger!: MatMenuTrigger;
   theme: string = "light";
 
   // Facades
@@ -64,7 +64,7 @@ export class HeaderComponent {
     const openDialog = this.dialog.open(LoginComponent, {
       restoreFocus: false,
     });
-    openDialog.afterClosed().subscribe(() => this.menuTrigger.focus());
+    // openDialog.afterClosed().subscribe(() => this.menuTrigger.focus());
   }
 
   toggleTheme() {

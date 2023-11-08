@@ -9,7 +9,8 @@
     <span>{{t('header.my_app')}}</span>
     <span class="example-spacer"></span>
 
-    <button mat-mini-fab class="bg-black" [matMenuTriggerFor]="menu" #menuTrigger>
+    <button mat-mini-fab class="bg-black" [matMenuTriggerFor]="menu">
+    <!-- <button mat-mini-fab class="bg-black" [matMenuTriggerFor]="menu" #menuTrigger> -->
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu">

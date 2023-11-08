@@ -1,0 +1,50 @@
+<div style="overflow-x:auto;">
+  <table>
+    <thead>
+      <tr>
+        <th>Thumbnail</th>
+        <th>Title</th>
+        <th>Brand</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let product of productFacade.productList$| async">
+        <tr>
+          <td>
+            <img [src]="product.thumbnail" width="100">
+          </td>
+          <td>{{product.title}}</td>
+          <td>{{product.brand}}</td>
+          <td>{{product.category}}</td>
+          <td>{{product.description}}</td>
+          <td>{{product.price}}</td>
+          <td>{{product.stock}}</td>
+          <td>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>pageview</mat-icon>
+                <span>View</span>
+              </button>
+              <button mat-menu-item (click)="openUpdateDialog(product.id)">
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
