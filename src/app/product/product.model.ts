@@ -1,13 +1,13 @@
 export interface ProductsModel {
-    id: number;
-    brand: string;
-    category: string;
+    id?: number;
+    brand?: string;
+    category?: string;
     description?: string;
-    discountPercentage: number;
+    discountPercentage?: number;
     images?: string[];
-    price: number;
+    price?: number;
     rating?: number;
-    stock: number;
+    stock?: number;
     thumbnail?: string;
-    title: string;
+    title?: string;
 }

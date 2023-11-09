@@ -17,12 +17,16 @@ import { productReducer } from "./product/product.reducer";
 import { provideEffects } from "@ngrx/effects";
 import { ProductEffects } from "./product/product.effects";
 import { dialogReducer } from "./common/util/dialog/dialog.reducer";
+import { FormControl, FormGroup } from "@angular/forms";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter([...routes]),
     provideAnimations(),
-    importProvidersFrom(),
+    importProvidersFrom(
+      FormGroup,
+      FormControl
+    ),
     provideStore({
       currentTheme: themeReducer,
       selectedLanguage: languageReducer,

@@ -1,0 +1,50 @@
+<div class="form-style">
+    <h1>Update Product</h1>
+    <form [formGroup]="myForm">
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Title" formControlName="title" type="text">
+                <mat-icon matSuffix [ngStyle]="{'color': myForm.get('title')?.valid ? '' : 'red'}">{{myForm.get('title')?.valid ? 'sentiment_very_satisfied' : 'mood_bad'}}</mat-icon>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Brand</mat-label>
+                <input matInput placeholder="Brand" formControlName="brand" type="text">
+                <mat-icon matSuffix [ngStyle]="{'color': myForm.get('brand')?.valid ? '' : 'red'}">{{myForm.get('brand')?.valid ? 'sentiment_very_satisfied' : 'mood_bad'}}</mat-icon>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Category</mat-label>
+                <input matInput placeholder="Category" formControlName="category" type="text">
+                <mat-icon matSuffix [ngStyle]="{'color': myForm.get('category')?.valid ? '' : 'red'}">{{myForm.get('category')?.valid ? 'sentiment_very_satisfied': 'mood_bad'}}</mat-icon>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Description</mat-label>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+                    cdkAutosizeMaxRows="5" placeholder="description" formControlName="description"></textarea>
+                <mat-icon matSuffix [ngStyle]="{'color': myForm.get('description')?.valid ? '' : 'red'}">{{myForm.get('description')?.valid ? 'sentiment_very_satisfied': 'mood_bad'}}</mat-icon>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Price</mat-label>
+                <input matInput placeholder="Price" formControlName="price" type="number">
+                <mat-icon matSuffix [ngStyle]="{'color': myForm.get('price')?.valid ? '' : 'red'}">{{myForm.get('price')?.valid ? 'sentiment_very_satisfied': 'mood_bad'}}</mat-icon>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Stock</mat-label>
+                <input matInput placeholder="Stock" formControlName="stock" type="number">
+                <mat-icon matSuffix [ngStyle]="{'color': myForm.get('stock')?.valid ? '' : 'red'}">{{myForm.get('stock')?.valid ? 'sentiment_very_satisfied': 'mood_bad'}}</mat-icon>
+            </mat-form-field>
+        </p>
+        <button mat-raised-button color="primary" (click)="updateForm(myForm.value)" [disabled]="!myForm.valid">Update</button>
+        <button mat-raised-button color="primary" (click)="resetForm()" [disabled]="!myForm.valid">Reset</button>
+    </form>
+</div>

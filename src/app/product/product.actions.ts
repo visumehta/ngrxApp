@@ -11,20 +11,30 @@ export const getProductActions = createActionGroup({
     }
 });
 
-export const getProductDetailsActions = createActionGroup({
-    source: 'getProductDetails',
+export const getProductByIdActions = createActionGroup({
+    source: 'Get Product By Id',
     events: {
-        'getProductDetails': emptyProps(),
-        'getProductDetailsSuccess': emptyProps(),
-        'getProductDetailsFailure': props<{error: string}>()
+        'getProductById': props<{productId: number}>(),
+        'getProductByIdSuccess': props<{product: ProductsModel}>(),
+        'getProductByIdFailure': props<{error: string}>()
     }
 })
 
 export const updateProductActions = createActionGroup({
     source: 'Update Product',
     events: {
-        'updateProduct': props<{productId: number, updateProduct: Update<ProductsModel>}>(),
-        'updateProductSuccess': props<{products: ProductsModel}>(),
+        'updateProduct': props<{productId: number, changes: Partial<ProductsModel>}>(),
+        'updateProductSuccess': props<{change: ProductsModel, successMessage: string}>(),
         'updateProductFailure': props<{error: string}>()
     }
-});
+})
+
+
+// export const updateProductActions = createActionGroup({
+//     source: 'Update Product',
+//     events: {
+//         'updateProduct': props<{productId: number, updateProduct: Update<ProductsModel>}>(),
+//         'updateProductSuccess': props<{products: ProductsModel}>(),
+//         'updateProductFailure': props<{error: string}>()
+//     }
+// });

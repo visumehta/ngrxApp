@@ -36,16 +36,16 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  openUpdateDialog(productId: number) {
-    console.log(productId);
-    const dialogRef = this.dialog.open(UpdateProductComponent, {
-      data: productId,
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log("close dialog", result);
+  openUpdateDialog(item: any) {
+    this.dialogFacade.openDialogWithSelectedProduct(item);
+    this.dialogFacade.getSelectedItem$.subscribe((params: any) => {
+      const dialRef = this.dialog.open(UpdateProductComponent, {data: params, width: '600px'});
+      this.dialogFacade.closeDialog();
 
-      // Perform any actions after the dialog is closed
-    });
-    this.dialogFacade.openDialogUsingId(productId);
+      dialRef.afterClosed().subscribe((res: any) => {
+        console.log('response after modal closed',res);
+        
+      })
+    })
   }
 }

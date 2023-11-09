@@ -1,8 +1,7 @@
 import { Injectable, inject } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { dialogActions } from "./dialog.actions";
-// import { MatDialog } from "@angular/material/dialog";
-import { UpdateProductComponent } from "src/app/product/dialogs/update-product/update-product.component";
+import { openDialogWithSelectedItemActions } from "./dialog.actions";
+import { selectedItemById } from "./dialog.selectors";
 
 @Injectable({
     providedIn: 'root'
@@ -10,20 +9,13 @@ import { UpdateProductComponent } from "src/app/product/dialogs/update-product/u
 
 export class dialogFacade {
     store = inject(Store);
-    // dialog = inject(MatDialog);
-
-    openDialogUsingId(productId: number) {
-        // const dialogRef = this.dialog.open(UpdateProductComponent, {data: productId});
-        // dialogRef.afterClosed().subscribe(result => {
-        //     console.log('close dialog', result);
-            
-        //     // Perform any actions after the dialog is closed
-        //   });
-        
-        this.store.dispatch(dialogActions.openDialog({productId}));
+   
+    getSelectedItem$ = this.store.select(selectedItemById);
+    openDialogWithSelectedProduct(selectedProduct: any) {
+        this.store.dispatch(openDialogWithSelectedItemActions.openDialog({selectedProduct}))
     }
 
     closeDialog() {
-        this.store.dispatch(dialogActions.closeDialog());
+        this.store.dispatch(openDialogWithSelectedItemActions.closeDialog())
     }
 }

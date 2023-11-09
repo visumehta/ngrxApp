@@ -14,8 +14,13 @@ export class HttpService {
     return this.http.get<ProductsModel[]>(this.productUrl);
   }
 
-  getProductDetails(productId: number) {
-    return this.http.get(`${this.productUrl}/${productId}`).pipe(map((res: any) => {
+  getProductDetails(productId: number): Observable<ProductsModel> {
+    return this.http.get(`${this.productUrl}/${productId}`);
+  }
+
+  updateProduct(productId: number, change: ProductsModel) {
+    return this.http.patch(`${this.productUrl}/${productId}`, change).pipe(map((res: any) => {
+      console.log('res', res);
       return res;
     }))
   }

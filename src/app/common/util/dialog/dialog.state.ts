@@ -1,9 +1,11 @@
 export interface DialogState {
     open: boolean;
-    selectedProductId: number | null
+    productId: number | null;
+    selectedProduct: any | null;
 }
 
 export const initialDialogState: DialogState = {
     open: false,
-    selectedProductId: null
+    productId: null,
+    selectedProduct: null
 }

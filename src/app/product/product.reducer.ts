@@ -1,6 +1,6 @@
 import { createReducer, on, Action } from "@ngrx/store";
 import { ProductState, initialProductState, productAdapter } from "./product.adapter";
-import { getProductActions, updateProductActions } from "./product.actions";
+import { getProductActions, getProductByIdActions, updateProductActions } from "./product.actions";
 
 const _productReducer = createReducer<ProductState>(
     initialProductState,
@@ -15,17 +15,40 @@ const _productReducer = createReducer<ProductState>(
         ...state,
         error
     })),
+
     // Get product details
+   on(getProductByIdActions.getProductById, (state, {productId}) => ({
+    ...state,
+    productId
+   })),
+   on(getProductByIdActions.getProductByIdSuccess, (state, {product}) => ({
+    ...state,
+    product
+   })),
+   on(getProductByIdActions.getProductByIdFailure, (state, {error}) => ({
+    ...state,
+    error
+   })),
+
+    // Update Product
+    on(updateProductActions.updateProduct, (state, {productId,changes}) => {
+        return productAdapter.updateOne({id: productId,changes}, state)
+    }),
+    on(updateProductActions.updateProductSuccess, (state, {change, successMessage}) => ({
+        ...state,
+        change, successMessage
+    })),
+    on(updateProductActions.updateProductFailure, (state, {error}) => ({
+        ...state,
+        error
+    }))
     
-    // Update products
-    on(updateProductActions.updateProduct, (state, {updateProduct}) => {
-        return productAdapter.updateOne(updateProduct, state)
-    })
+   
 )
 
 export function productReducer(state:ProductState|undefined, action: Action) {
-    console.log('state.......',state);
-    console.log('action.....',action);
+    // console.log('state.......',state);
+    // console.log('action.....',action);
     
     return _productReducer(state, action);
 }
