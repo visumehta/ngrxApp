@@ -1,15 +1,16 @@
 import { Injectable, inject } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { getProductActions, getProductByIdActions, updateProductActions } from "./product.actions";
-import { catchError, map, mergeMap, of } from "rxjs";
+import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { HttpService } from "../services/http.service";
-import { openDialogWithSelectedItemActions } from "../common/util/dialog/dialog.actions";
-// import { dialogActions } from "../common/util/dialog/dialog.actions";
+import { MatDialog } from "@angular/material/dialog";
 
 @Injectable()
 export class ProductEffects {
+
   action$ = inject(Actions);
   _httpService = inject(HttpService);
+  dialog = inject(MatDialog);
 
   loadProducts$ = createEffect(() =>
     this.action$.pipe(
@@ -55,9 +56,4 @@ export class ProductEffects {
     )
   );
 
-  // closeDialogModal$ = createEffect(() => 
-  //     this.action$.pipe(
-  //       ofType(updateProductActions.updateProductSuccess),
-  //     )
-  // )
 }

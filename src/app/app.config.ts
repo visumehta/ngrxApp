@@ -18,6 +18,8 @@ import { provideEffects } from "@ngrx/effects";
 import { ProductEffects } from "./product/product.effects";
 import { dialogReducer } from "./common/util/dialog/dialog.reducer";
 import { FormControl, FormGroup } from "@angular/forms";
+import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
+import { DialogEffects } from "./common/util/dialog/dialog.effects";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,7 +27,8 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     importProvidersFrom(
       FormGroup,
-      FormControl
+      FormControl,
+      MatDialogModule,
     ),
     provideStore({
       currentTheme: themeReducer,
@@ -33,7 +36,7 @@ export const appConfig: ApplicationConfig = {
       products: productReducer,
       openDialog: dialogReducer
     }),
-    provideEffects([ProductEffects]),
+    provideEffects([ProductEffects, DialogEffects]),
     provideStoreDevtools({
       maxAge: 55,
       logOnly: false, // maximum stack trace frames to be stored (in case trace option was provided as true)

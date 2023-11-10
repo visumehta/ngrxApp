@@ -8,14 +8,14 @@ import { selectedItemById } from "./dialog.selectors";
 })
 
 export class dialogFacade {
-    store = inject(Store);
-   
+    store = inject(Store);   
     getSelectedItem$ = this.store.select(selectedItemById);
+
     openDialogWithSelectedProduct(selectedProduct: any) {
-        this.store.dispatch(openDialogWithSelectedItemActions.openDialog({selectedProduct}))
+        this.store.dispatch(openDialogWithSelectedItemActions.openDialog({selectedProduct}));
     }
 
-    closeDialog() {
-        this.store.dispatch(openDialogWithSelectedItemActions.closeDialog())
+    closeDialog(params: any) {
+        // this.store.dispatch(openDialogWithSelectedItemActions.closeDialog(params))
     }
 }

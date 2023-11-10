@@ -21,13 +21,15 @@ import { MatDialog, MatDialogModule } from "@angular/material/dialog";
     MatIconModule,
     MatMenuModule,
     MatButtonModule,
-    MatDialogModule,
+    MatDialogModule
   ],
 })
 export class ProductListComponent implements OnInit {
   productFacade = inject(ProductFacade);
   dialogFacade = inject(dialogFacade);
-  dialog = inject(MatDialog);
+  // dialog = inject(MatDialog);
+
+  constructor(private matDialog: MatDialog){}
 
   ngOnInit(): void {
     this.productFacade.getAllProducts();
@@ -38,14 +40,5 @@ export class ProductListComponent implements OnInit {
 
   openUpdateDialog(item: any) {
     this.dialogFacade.openDialogWithSelectedProduct(item);
-    this.dialogFacade.getSelectedItem$.subscribe((params: any) => {
-      const dialRef = this.dialog.open(UpdateProductComponent, {data: params, width: '600px'});
-      this.dialogFacade.closeDialog();
-
-      dialRef.afterClosed().subscribe((res: any) => {
-        console.log('response after modal closed',res);
-        
-      })
-    })
   }
 }

@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialogModule } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -14,6 +14,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { ProductsModel } from "../../product.model";
 import { CommonModule } from "@angular/common";
 import { ProductFacade } from "../../product.facade";
+import { DialogRef } from "@angular/cdk/dialog";
 
 @Component({
   selector: "app-update-product",
@@ -27,7 +28,8 @@ import { ProductFacade } from "../../product.facade";
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-    CommonModule
+    CommonModule,
+    MatDialogModule
   ],
   preserveWhitespaces: true
 })
@@ -41,13 +43,12 @@ export class UpdateProductComponent {
     stock: new FormControl(this.data.stock, [Validators.required]),
   });
   
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private productFacade: ProductFacade) {
-    console.log("data", data);
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private productFacade: ProductFacade, private dialogRef: DialogRef) {
   }
 
   updateForm(val: ProductsModel) {
-    console.log("update valasasas", val);
-    this.productFacade.updateProduct(this.data.id, val)
+    this.productFacade.updateProduct(this.data.id, val);
+    this.dialogRef.close();
     
   }
   resetForm() {
